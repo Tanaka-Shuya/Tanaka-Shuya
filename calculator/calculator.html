@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Tanaka Shuya's calculator</title>
+
+  <link rel="stylesheet" type="text/css" href="calculator.css">
+  <script src="calculator.js"></script>
+
+  <audio id="btn_audio0" src="audio0.mp3" preload="auto"></audio>
+  <audio id="btn_audio1" src="audio1.mp3" preload="auto"></audio>
+  <audio id="btn_audio2" src="audio2.mp3" preload="auto"></audio>
+  <audio id="btn_audio3" src="audio3.mp3" preload="auto"></audio>
+  <audio id="btn_audio4" src="audio4.mp3" preload="auto"></audio>
+  <audio id="btn_audio5" src="audio5.mp3" preload="auto"></audio>
+  <audio id="btn_audio6" src="audio6.mp3" preload="auto"></audio>
+  <audio id="btn_audio7" src="audio7.mp3" preload="auto"></audio>
+  <audio id="btn_audio8" src="audio8.mp3" preload="auto"></audio>
+  <audio id="btn_audio9" src="audio9.mp3" preload="auto"></audio>
+
+
+</head>
+
+<body style="background-color:#d4dcda; font-size:50px;">
+
+
+
+<div id="calculator">
+
+  <div class="body1">
+    <div class="name">TNK-Cd</div>
+    <div class="solar_panel"></div>
+    <div class="audio_letters">audio</div>
+    <div class="toggle_button">
+      <input id="toggle" class="toggle_input" type='checkbox' onclick="mute()">
+      <label for="toggle" class="toggle_label"></label>
+    </div>
+    
+    <div class="display">
+      <div class="flag_case">
+        <div id="memory">M</div><div id="error">E</div><div id="konstante">K</div>
+        <div id="flag4">÷</div><div id="flag3">×</div><div id="flag2">-</div><div id="flag1">+</div>
+      </div>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  &ensp;<button class="button1" onclick="memory_clear();audio()" disabled>MC</button>
+  <button class="button1" onclick="memory_recall();audio()" disabled>MR</button>
+  <button class="button1" onclick="memory_minus();audio()" disabled>M-</button>
+  <button class="button1" onclick="memory_plus();audio()" disabled>M+</button>
+  <button class="button1" onclick="calculate(4);audio()" disabled>÷</button>
+  <br>
+  &ensp;<button class="button1" onclick="plus_minus();audio()" disabled>+/-</button>
+  <button class="button2" onclick="number(7);audio()" disabled>7</button>
+  <button class="button2" onclick="number(8);audio()" disabled>8</button>
+  <button class="button2" onclick="number(9);audio()" disabled>9</button>
+  <button class="button1" onclick="calculate(3);audio()" disabled>×</button>
+  <br>
+  &ensp;<button class="button1" onclick="cancel();audio()" disabled>▶︎</button>
+  <button class="button2" onclick="number(4);audio()" disabled>4</button>
+  <button class="button2" onclick="number(5);audio()" disabled>5</button>
+  <button class="button2" onclick="number(6);audio()" disabled>6</button>
+  <button class="button1" onclick="calculate(2);audio()" disabled>－</button>
+  <br>
+  &ensp;<button class="button3" onclick="Clear();audio()" disabled>C</button>
+  <button class="button2" onclick="number(1);audio()" disabled>1</button>
+  <button class="button2" onclick="number(2);audio()" disabled>2</button>
+  <button class="button2" onclick="number(3);audio()" disabled>3</button>
+  <button class="button1" onclick="calculate(1);audio()" disabled>+</button>
+  <br>
+  <span class="on_letters">ON</span>
+  <button class="button3" onclick="AllClear();audio()">AC</button>
+  <button class="button2" onclick="number_zero();audio()" disabled>0</button>
+  <button class="button2" onclick="number_doublezero();audio()" disabled>00</button>
+  <button class="button2" onclick="dot();audio()" disabled>.</button>
+  <button class="button1" onclick="Equal();audio()" disabled>=</button>
+
+</div>
+
+ <!--
+ MC  MR  M-  M+  ÷
+ +/- 7   8   9   x
+ ▶︎   4   5   6   -
+ C   1   2   3   +
+ AC  o   00  .   =
+ -->
+	
+</body>
+</html>
