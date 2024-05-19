@@ -1,0 +1,185 @@
+\documentclass[uplatex,12pt]{jsarticle}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage[margin=30truemm]{geometry}
+\usepackage[utf8]{inputenc}
+%\pagestyle{empty}
+\numberwithin{equation}{section}
+\usepackage{amsthm}
+
+%参照したい式番号のみ表示
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+
+
+%定理環境
+\theoremstyle{definition}
+\newtheorem{definition}{定義}[section]
+\newtheorem{theorem}[definition]{定理}
+\newtheorem{proposition}[definition]{命題}
+\newtheorem{lemma}[definition]{補題}
+
+%割り切らない記号
+\newcommand{\ndiv}{\not\hspace{2pt}\mid}
+
+%displaystyle
+\newcommand{\dsum}{\displaystyle\sum}
+\newcommand{\dprod}{\displaystyle\prod}
+
+%Re, Im
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+%タイトル
+\title{ディリクレの算術級数定理について}
+\author{田中柊也\\理学研究科数学専攻\\24A23017}
+\date{\today}
+
+%ページ跨ぎ
+\allowdisplaybreaks
+
+\begin{document}
+
+
+
+
+\section{今年度の研究計画}
+参考文献\cite{arithmetic}に倣って次の定理について学ぶことが目標であった.
+
+以下,\ $m\in\mathbb{Z}_{>0}$を固定する.
+
+
+\begin{theorem}[ディリクレの算術級数定理] \label{thm:Dirichlet}
+$P$を素数全体の集合とする.
+$\gcd (a,m)=1$\ なる$a\in\mathbb{Z}$に対して, $P_a := \{p\in P \mid p\equiv a\mod m\}$とおく.このとき,\ $P_a$は無限集合である.
+\end{theorem}
+
+初めに,\ リーマンゼータ関数を導入して次の命題を示した.
+
+\begin{proposition} \label{thm:zeta}
+\begin{equation} 
+	\sum_{p\in P}p^{-s}\sim \log\left(\frac{1}{s-1}\right) \quad (s\searrow 1).
+\end{equation}
+ただし,\ $s$は実軸上で正の方向から近づけるとする.ここで,
+\begin{equation}
+	f(x)\sim g(x)\quad(x\searrow\alpha)\ \overset{\text{def}}{\Longleftrightarrow}\ \lim_{x\searrow\alpha}\frac{f(x)}{g(x)}=1
+\end{equation}
+と定義する.
+\end{proposition}
+
+
+すると,\ $P$の部分集合に対して,\ その密度という概念が自然と定義できる:
+\begin{definition}
+$A\subset P$を部分集合とする.
+\begin{equation}
+	\left(\sum_{p\in A}\frac{1}{p^s}\right) \bigg/ \left\{\log\left(\frac{1}{s-1}\right)\right\}\rightarrow k \quad(s\searrow 1)
+\end{equation}
+となる$k\in\mathbb{R}$が存在するとき,\ $A$は密度$k$を持つという.命題\ref{thm:zeta}.より,\ $0\leq k\leq1$が成り立つ.
+\end{definition}
+
+
+定理\ref{thm:Dirichlet}.を証明するにあたって,\ 必要な議論の要点を以下にまとめる.
+
+
+\begin{definition}
+$G(m):=(\mathbb{Z}/m\mathbb{Z})^\times$とし,\ $\chi\in\widehat{G(m)}$を$m$を法とするディリクレ指標とする.
+$\chi\in\widehat{G(m)}$に対して,
+\begin{equation}
+	g_a(s):=\sum_{p\in P_a}\frac{1}{p^s},\quad f_\chi(s):=\sum_{p\ndiv m}\frac{\chi(p)}{p^s} \quad(\Re(s)>0)
+\end{equation}
+とおく.
+\end{definition}
+
+
+
+以下に示す3つの補題により,\ $s\searrow1$における$g_a(s)$および$f_\chi(s)$の振る舞いを調べることが目標となる.
+次の補題は有限群$G(m)$に関する指標の直交性から従う.
+\begin{lemma}\label{lem:g_a}
+\begin{equation}   
+	g_a(s)=\frac{1}{\phi(m)}\sum_{\chi\in\widehat{G(m)}}\chi(a)^{-1}f_\chi(s).
+\end{equation}
+\end{lemma}
+
+
+次の補題は命題\ref{thm:zeta}.の主張より従う.
+\begin{lemma}\label{lem:f_1}
+\begin{equation}   
+	f_1(s) \sim \log\left(\frac{1}{s-1}\right) \quad (s\searrow 1).
+\end{equation}
+\end{lemma}
+
+
+後述の補題\ref{lem:chi-bounded}.を示すにあたって,\ ディリクレの$L$関数を導入して次の命題を示す.
+\begin{definition}
+$\chi\in\widehat{G(m)}$に対して,
+\begin{equation}
+	L(s,\chi):=\sum_{n=1}^\infty \frac{\chi(n)}{n^s} \quad(\Re(s)>0)
+\end{equation}
+をディリクレの$L$関数という.
+\end{definition}
+
+\begin{proposition} \label{prop:L-1}
+任意の$1\ne\chi\in\widehat{G(m)}$に対して,\ $L(1,\chi)\ne0$.
+\end{proposition}
+
+この命題はディリクレの$L$関数に関する重要な主張である.
+\begin{equation}
+	\zeta_m(s):=\dprod_{\chi\in\widehat{G(m)}}L(s,\chi) \quad(\Re(s)>0)
+\end{equation}	
+が非負係数のディリクレ級数になるという事実と,\ 非負係数のディリクレ級数の収束に関する非自明な命題から示すことができる.
+
+
+この命題により,\ 次の補題が従う.
+
+\begin{lemma}\label{lem:chi-bounded}
+任意の$\chi\ne1$に対して,\ $f_\chi$は$s\searrow1$で有界となる.
+\end{lemma}
+
+以上で定理\ref{thm:Dirichlet}.を示すために必要な補題が揃った.
+
+
+\begin{proof}[\bf{定理\ref{thm:Dirichlet}.の証明}]
+$P_a$の密度が$1/\phi(m)$となることについて示す.
+補題\ref{lem:g_a}.より,
+\begin{align}
+g_a(s) &= \frac{1}{\phi(m)}\sum_{\chi\in\widehat{G(m)}}\chi(a)^{-1}f_\chi(s) \\
+       &= \frac{1}{\phi(m)}\left\{f_1(s)+\sum_{\chi\ne1}\chi(a)^{-1}f_\chi(s)\right\}.
+\end{align}
+また,\ 補題\ref{lem:chi-bounded}.より,\ ある$M>0$と$\delta>0$が存在して,\ $s\in(1,1+\delta)$ならば
+\begin{equation}
+	\left|\dsum_{\chi\ne1}\chi(a)^{-1}f_\chi(s)\right|\leq M
+\end{equation}
+とできる.したがって,\ 補題\ref{lem:f_1}.を踏まえると,
+\begin{align}
+&\lim_{s\searrow1}\left|\frac{g_a(s)}{\log\left(\dfrac{1}{s-1}\right)}-\frac{1}{\phi(m)}\right| \\
+&\leq \frac{1}{\phi(m)}\lim_{s\searrow1}\left|\frac{f_1(s)}{\log\left(\dfrac{1}{s-1}\right)}-1\right|+\frac{M}{\phi(m)}\lim_{s\searrow1}\frac{1}{\left|\log\left(\dfrac{1}{s-1}\right)\right|} =0.
+\end{align}
+
+\end{proof}
+
+
+
+\section{次年度の研究計画}
+
+今回は"解析的密度"を密度として扱ったが,\ "自然密度"と呼ばれる密度概念も存在する.
+
+\begin{definition}
+$A\subset P$を部分集合とする.\ $\mu_A(n):={}^\#\{p\in A\mid p\leq n\}$として,
+\begin{equation}
+	\frac{\mu_A(n)}{\mu_P(n)}\rightarrow k \quad(n\to1)
+\end{equation}
+となる$k\in\mathbb{R}$が存在するとき,\ $A$は自然密度$k$を持つという.
+\end{definition}
+解析的密度と自然密度の関係性は参考文献で紹介されていたが,\ その詳しい証明や法則性については調べ切れていないため,\ 次年度以降議論を詰めていきたい.また,現在は保型形式やユニタリ表現について学習しているところである.研究の具体的な方向性はまだ定まっていないが,\ 広く知見を深めた上で関心を持った内容に注力していく.
+
+\begin{thebibliography}{99}
+
+\bibitem{arithmetic} Jean-Pierre Serre, \textit{A Course in Arithmetic}, Springer, New York (1970).
+
+
+\end{thebibliography}
+
+
+
+\end{document}
